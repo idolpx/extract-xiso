@@ -1,7 +1,7 @@
 extract-xiso v2.7.2
 
 Added case insensitive compare for $SystemUpdate (idolpx)
-included pthreads library in project
+Included pthreads library in project
 
 extract-xiso v2.7.1 
 
