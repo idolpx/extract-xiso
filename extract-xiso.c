@@ -229,6 +229,8 @@
 		01.11.14 twillecomme: Intégration of aiyyo's and somski's work. 
 						Minor warn fixes.
 
+		12.20.16 idolpx: Added case insensitive compare for $SystemUpdate (skip didn't work if case didn't match)
+
 	enjoy!
 	
 	in
@@ -412,7 +414,7 @@
 #endif
 
 
-#define exiso_version					"2.7.1 (01.11.14)"
+#define exiso_version					"2.7.2 (12.21.2016)"
 #define VERSION_LENGTH					16
 
 #define banner							"extract-xiso v" exiso_version " for " exiso_target " - written by in <in@fishtank.com>\n"
@@ -697,6 +699,7 @@ int calculate_directory_requirements( dir_node_avl *in_avl, void *in_context, in
 int calculate_directory_offsets( dir_node_avl *in_avl, unsigned long *io_context, int in_depth );
 int write_dir_start_and_file_positions( dir_node_avl *in_avl, wdsafp_context *io_context, int in_depth );
 int write_volume_descriptors( int in_xiso, unsigned long in_total_sectors );
+char *lower(char *s);
 
 #if DEBUG
 void write_sector( int in_xiso, xoff_t in_start, char *in_name, char *in_extension );
@@ -719,7 +722,8 @@ static int								s_total_files_all_isos = 0;
 static bool								s_warned = 0;
 
 static bool				                s_remove_systemupdate = false; 
-static char				               *s_systemupdate = "$SystemUpdate"; 
+static char				               *s_systemupdate = "$systemupdate";
+static char							   *s_lower=nil;
 
 static xoff_t							s_xbox_disc_lseek = 0;
 
@@ -1496,7 +1500,7 @@ left_processed:
 			} else path = nil;
 	
 			if ( ! err ) {
-				if ( !s_remove_systemupdate || !strstr( dir->filename, s_systemupdate ) )
+				if ( !s_remove_systemupdate || !strstr( lower(dir->filename), s_systemupdate ) )
 				{
 				if ( in_mode == k_extract ) {
 					if ( ( err = mkdir( dir->filename, 0755 ) ) ) mkdir_err( dir->filename );
@@ -1515,7 +1519,7 @@ left_processed:
 				subdir.parent = nil;
 				if ( ! err && dir->file_size > 0 ) err = traverse_xiso( in_xiso, &subdir, (xoff_t) dir->start_sector * XISO_SECTOR_SIZE + s_xbox_disc_lseek, path, in_mode, in_mode == k_generate_avl ? &dir->avl_node->subdirectory : nil, in_ll_compat );        
 
-				if ( !s_remove_systemupdate || !strstr( dir->filename, s_systemupdate ) )
+				if ( !s_remove_systemupdate || !strstr( lower(dir->filename), s_systemupdate ) )
 				{
 	
 				if ( ! err && in_mode == k_extract && ( err = chdir( ".." ) ) ) chdir_err( ".." );
@@ -1526,7 +1530,7 @@ left_processed:
 			if ( path ) free( path );
 		} else if ( in_mode != k_generate_avl ) {
 			if ( ! err ) {
-				if ( !s_remove_systemupdate || !strstr( in_path, s_systemupdate ) )
+				if ( !s_remove_systemupdate || !strstr( lower(in_path), s_systemupdate ) )
 				{
 
 				if ( in_mode == k_extract || in_mode == k_upload ) {
@@ -1833,7 +1837,7 @@ int extract_file( int in_xiso, dir_node *in_file, modes in_mode , char* path) {
 	unsigned long			i, size, totalsize = 0, totalpercent = 0;
 	int						out;
 
-	if ( s_remove_systemupdate && strstr( path, s_systemupdate ) )
+	if ( s_remove_systemupdate && strstr( lower(path), s_systemupdate ) )
 	{
 		if ( ! err && lseek( in_xiso, (xoff_t) in_file->start_sector * XISO_SECTOR_SIZE + s_xbox_disc_lseek, SEEK_SET ) == -1 ) seek_err();
 		}
@@ -2383,3 +2387,16 @@ void write_sector( int in_xiso, xoff_t in_start, char *in_name, char *in_extensi
 }
 
 #endif
+
+// Convert string to lowercase - idolpx
+char *lower(char *s)
+{
+	int i;
+
+	s_lower = (char *) malloc( strlen(s) );
+
+	for(i=0; s[i] != '\0'; i++)
+		s_lower[i] = tolower(s[i]);
+	s_lower[i] = '\0';
+	return s_lower;
+}

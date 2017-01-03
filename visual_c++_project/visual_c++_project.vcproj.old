@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="Windows-1252"?>
+<?xml version="1.0" encoding = "Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="7.00"
 	Name="visual_c++_project"
 	ProjectGUID="{A6AE4B10-E96A-437D-A5A2-E4868EC1C55C}"
 	Keyword="Win32Proj">
@@ -50,13 +50,7 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
 				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
@@ -69,7 +63,6 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories="&quot;Y:\src\extract-xiso\pthreads\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				StringPooling="TRUE"
 				ExceptionHandling="FALSE"
@@ -104,27 +97,13 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
 				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 	</Configurations>
-	<References>
-	</References>
 	<Files>
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm">
-			<File
-				RelativePath="..\extract-xiso.c">
-			</File>
-			<File
-				RelativePath="..\libftp-5.0.1.modified.by.in\Ftp_etclib.c">
-			</File>
 			<File
 				RelativePath="..\libftp-5.0.1.modified.by.in\FtpAbort.c">
 			</File>
@@ -159,9 +138,6 @@
 				RelativePath="..\libftp-5.0.1.modified.by.in\FtpFilenameChecker.c">
 			</File>
 			<File
-				RelativePath="..\libftp-5.0.1.modified.by.in\Ftpfopen.c">
-			</File>
-			<File
 				RelativePath="..\libftp-5.0.1.modified.by.in\FtpFull.c">
 			</File>
 			<File
@@ -174,10 +150,10 @@
 				RelativePath="..\libftp-5.0.1.modified.by.in\FtpHTTP.c">
 			</File>
 			<File
-				RelativePath="..\libftp-5.0.1.modified.by.in\FtpInit.c">
+				RelativePath="..\libftp-5.0.1.modified.by.in\FtpIO.c">
 			</File>
 			<File
-				RelativePath="..\libftp-5.0.1.modified.by.in\FtpIO.c">
+				RelativePath="..\libftp-5.0.1.modified.by.in\FtpInit.c">
 			</File>
 			<File
 				RelativePath="..\libftp-5.0.1.modified.by.in\FtpLibrary.h">
@@ -222,10 +198,16 @@
 				RelativePath="..\libftp-5.0.1.modified.by.in\FtpType.c">
 			</File>
 			<File
-				RelativePath="..\pthreads\lib\pthreadVC2.lib">
+				RelativePath="..\libftp-5.0.1.modified.by.in\Ftp_etclib.c">
 			</File>
 			<File
-				RelativePath="C:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\PlatformSDK\Lib\WS2_32.Lib">
+				RelativePath="..\libftp-5.0.1.modified.by.in\Ftpfopen.c">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\Program Files\Microsoft Visual Studio .NET\Vc7\PlatformSDK\lib\WS2_32.Lib">
+			</File>
+			<File
+				RelativePath="..\extract-xiso.c">
 			</File>
 		</Filter>
 	</Files>

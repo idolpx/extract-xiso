@@ -15,6 +15,9 @@ Commercial  usage is  also  possible  with  participation of it's author.
 
 #include "FtpLibrary.h"
 
+#if defined( _WIN32 )
+	#include <pthread.h>
+#endif
 
 enum {T_EMPTY=0,T_FILE,T_STREAM,T_PIPE,T_FULL};
 
